@@ -1,6 +1,9 @@
-<!-- Toolbar -->
 <div class="toolbar" role="banner">
-    <div class="spacer"></div>
-    <span>Bienvenido a la App</span>
+  <div class="spacer"></div>
+    <nav class="menu">
+      <a [routerLink]="['/']"><span>Inicio</span></a> |
+      <a [routerLink]="['/sucursales']" class="button"><span>Sucursales</span></a> |
+      <a [routerLink]="['/ventas']" class="button"><span>Ventas</span></a> 
+    </nav>
     <div class="spacer"></div>
   </div>

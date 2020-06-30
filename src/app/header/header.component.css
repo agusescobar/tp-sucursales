@@ -9,7 +9,7 @@
   }
 
   h1,
-  h2,
+  h2, 
   h3,
   h4,
   h5,
@@ -49,4 +49,12 @@
 
   .toolbar #twitter-logo:hover {
     opacity: 0.8;
+  }
+  .menu a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .menu a:hover {
+    text-decoration: underline;
   }

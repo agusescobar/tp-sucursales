@@ -1,10 +1,19 @@
 td {
-    line-height: 24px;
-    min-width: 130px;
+    line-height: 50px;
+    min-width: 100px;
     background-color: rgba(131, 131, 131, 0.1);
     padding: 4px;
 }
+th {
+    line-height: 50px;
+    min-width: 100px;
+    background-color: #dcdde1;
+    padding: 10px;
+}
 
-.firstrow {
-    display: none;
+.contenido {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

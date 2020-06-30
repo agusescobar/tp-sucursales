@@ -4,7 +4,8 @@ export class Sucursal {
     /* Modelo TypeScript */
     constructor(
         private _nombre: string,
-        private _lugar: string,
+        private _lugar: string, 
+        private _direccion: string,
         private _ventaspormes: Array<number>
     ) { }
 
@@ -24,6 +25,13 @@ export class Sucursal {
         this._lugar = lugar;
     }
 
+    get direccion(): string { // get por defecto
+        return this._direccion;
+    }
+
+    set direccion(direc: string) { // set por defecto
+        this._direccion = direc;
+    }
     setVentasMes(ventas: number, mes: number) {
         if(mes > 0 && ventas >= 0) {
             this._ventaspormes[mes] = ventas;

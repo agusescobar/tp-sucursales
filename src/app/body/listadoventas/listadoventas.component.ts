@@ -1,13 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Sucursal } from '../../classes/sucursal';
 import { Mes } from '../../classes/mes';
 
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexDataLabels,
+  ApexTitleSubtitle,
+  ApexStroke,
+  ApexGrid
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  dataLabels: ApexDataLabels;
+  grid: ApexGrid;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
+};
+
+
+
 @Component({
-  selector: 'app-listadosucursales',
-  templateUrl: './listadosucursales.component.html', 
-  styleUrls: ['./listadosucursales.component.css']
+  selector: 'app-listadoventas',
+  templateUrl: './listadoventas.component.html',
+  styleUrls: ['./listadoventas.component.css']
 })
-export class ListadosucursalesComponent implements OnInit {
+export class ListadoventasComponent implements OnInit {
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
   public listadoSucursales: Array<Sucursal>;
   public Sucursal1: Sucursal;
   public Sucursal2: Sucursal;
@@ -23,8 +48,43 @@ export class ListadosucursalesComponent implements OnInit {
     return Math.floor(Math.random() * nromax) + 1;
   }
   constructor() {
-
+    this.chartOptions = {
+      series: [
+      ],
+      chart: {
+        height: 800,
+        type: "line",
+        stacked: false,
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: true
+      },
+      stroke: {
+        curve: "straight",
+        width: [1, 1]
+      },
+      
+      grid: {
+        row: {
+          colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+          opacity: 0.5
+        }
+      },
+      xaxis: {
+        categories: [
+          "Enero","Febrero","Marzo",
+          "Abril","Mayo","Junio",
+          "Julio","Agosto","Septiembre",
+          "Octubre","Noviembre","Diciembre"
+        ]
+      }
+    };
   }
+
+ 
 
   ngOnInit(): void {
     this.Meses = new Array(new Mes("Enero",31),
@@ -47,8 +107,18 @@ export class ListadosucursalesComponent implements OnInit {
     this.Sucursal5 = new Sucursal("Sucursal Sur 2", "Rufino", "Calle 5" ,  new Array(this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom(),this.nroRandom()));
     this.listadoSucursales = new Array(this.Sucursal1, this.Sucursal2, this.Sucursal3, this.Sucursal4, this.Sucursal5);
 
-
-
+    for (let suc of this.listadoSucursales) {
+      this.chartOptions.series.push(
+        {
+          name: suc.nombre,
+          data: suc.ventas
+        }
+      )
   }
+  }
+  
+
+  
+
 
 }
